@@ -5,8 +5,7 @@
 - ex usage: cat wordlist.txt | ./accent_permutator.bin | hashcat.bin...
 - written by cyclone
 
-### compile hashgen from source
-- If you want the latest hashgen features, compiling from source is the best option since the release version may run several revisions behind the source code.
+### compile from source
 - Compile from source code info:
 - https://github.com/cyclone-github/scripts/blob/main/intro_to_go.txt
 
