@@ -11,3 +11,4 @@
 
 ### version history
 - v2023-08-10.2330; initial github release
+- v2023-08-16.1430; changed read logic to process large wordlists line by line, preventing memory issues
