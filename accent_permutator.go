@@ -13,7 +13,9 @@ import (
 // ex input: plaintext "password" or "$HEX[70617373776f7264]"
 // ex usage: cat wordlist.txt | ./accent_permutator.bin | hashcat.bin...
 // written by cyclone
-// v2023-08-10.2330
+// changelog
+// v2023-08-10.2330; initial github release
+// v2023-08-16.1430; changed read logic to process large wordlists line by line, preventing memory issues
 
 var accentReplacements = map[rune][]rune{
 	'a': {'á', 'à', 'â', 'ã', 'ä', 'å', 'ā', 'ă', 'α', 'ά', 'a'},
@@ -80,7 +82,6 @@ func applyAccents(input string, pos int, result []rune) {
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 
-	var inputs []string
 	for scanner.Scan() {
 		inputLine := strings.TrimSpace(scanner.Text())
 
@@ -94,12 +95,8 @@ func main() {
 			}
 		}
 
-		inputs = append(inputs, inputLine)
-	}
-
-	for _, input := range inputs {
-		result := make([]rune, len(input))
-		applyAccents(input, 0, result)
+		result := make([]rune, len(inputLine))
+		applyAccents(inputLine, 0, result)
 	}
 
 	if scanner.Err() != nil {
